@@ -15,6 +15,9 @@
           <span>密码:</span>
           <input v-model="user.password"/>
 		  <br />
+		  <span>邮箱:</span>
+		  <input v-model="user.email"/>
+		  <br />
 		  <span>用户类型:</span>
 		  <el-select v-model="user.type" placeholder="请选择用户类型">
 		  <el-option
@@ -35,6 +38,7 @@
 </template>
 
 <script>
+import {UserAdd} from '../../api/user'
 export default {
   data () {
     return {
@@ -55,13 +59,34 @@ export default {
 		user:{
 			name:'000',
 			id:'12345',
-			password:'123456'
+			password:'123456',
+			email:'123@qq.com',
+			type:'1'
 		}
     }
   },
   methods: {
 	  addUser(){
-		  
+		  UserAdd ({
+		    userid: this.user.id,
+			username:this.user.name,
+		    password: this.user.password
+		  }).then((r)=>{
+			  console.log(r)
+		    // if(r.header.code === -1){
+		    //   this.$message.error(r.header.message)
+		    //   return
+		    // }
+		    // else{
+		    //   this.$message('您已成功登录！')
+		    //   var token=r.data.token
+		    //   var user=r.data.user
+		    //   this.$store.dispatch('setUser',user)
+		    //   this.$store.dispatch('setToken',token)
+		    //   this.$router.push('/')
+		  }).catch((err)=>{
+		    console.log(err)
+		  })
 	  }
   },
   mounted () {
