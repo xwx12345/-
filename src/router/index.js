@@ -1,22 +1,68 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: resolve => require(['@/components/MainComponent.vue'], resolve),
+    children:[
+    	{
+    		path: '/',
+    		name: 'home',
+    		component: resolve => require(['@/views/home/home.vue'], resolve)
+    	},
+		{
+			path: '/user',
+			name: 'user',
+			component: resolve => require(['@/views/user/user.vue'], resolve),
+			children:[
+				{
+					path: '/',
+					name: 'userinfo',
+					component: resolve => require(['@/views/user/userinfo.vue'], resolve)
+				},
+				{
+					path: '/feedback',
+					name: 'feedback',
+					component: resolve => require(['@/views/user/feedback.vue'], resolve)
+				},
+				{
+					path: '/useradd',
+					name: 'useradd',
+					component: resolve => require(['@/views/user/useradd.vue'], resolve)
+				}
+			]
+		},
+		{
+			path: '/course',
+			name: 'course',
+			component: resolve => require(['@/views/course/course.vue'], resolve)
+		},
+		{
+			path: '/project',
+			name: 'project',
+			component: resolve => require(['@/views/project/project.vue'], resolve),
+			children:[
+				{
+					path: '/',
+					name: 'projectDetail',
+					component: resolve => require(['@/views/project/projectDetail.vue'], resolve)
+				},
+				{
+					path: '/projectRepo',
+					name: 'projectRepo',
+					component: resolve => require(['@/views/project/projectRepo.vue'], resolve)
+				},
+				{
+					path: '/projectGrade',
+					name: 'projectGrade',
+					component: resolve => require(['@/views/project/projectGrade.vue'], resolve)
+				}
+			]
+		}
+    ]
   }
 ]
 
