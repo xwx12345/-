@@ -28,11 +28,34 @@
 		    >
 		  </el-option>
 		  </el-select>
+		</div>
         <div class="button" @click="addUser()">
           <i class="el-icon-circle-plus-outline"></i>
         </div>
-      </div>
     </div>
+	<div class="button">
+	    <span>增加课程</span>
+	  </div>
+	  <div class="form">
+	    <div class="main">
+	      <span>课程名:</span>
+	      <input v-model="course.name"/>
+	      <br />
+	      <span>课程id</span>
+	      <input v-model="course.id"/>
+	      <br />
+		  <span>教师id:</span>
+		  <input v-model="course.teacher"/>
+		  <br />
+		  <span>课程简介</span>
+		  <el-input type="textarea" v-model="course.info"/>
+		  <br />
+		</div>
+	    <div class="button" @click="addCourse()">
+	      <i class="el-icon-circle-plus-outline"></i>
+	    </div>
+	  </div>
+	</div>
   </div>
 </div>
 </template>
@@ -62,6 +85,12 @@ export default {
 			password:'123456',
 			email:'123@qq.com',
 			type:'1'
+		},
+		course:{
+			name:'课程1',
+			id:'001',
+			teacher:'010',
+			info:'一句话简介'
 		}
     }
   },
@@ -87,6 +116,9 @@ export default {
 		  }).catch((err)=>{
 		    console.log(err)
 		  })
+	  },
+	  addCourse(){
+		  console.log('增加课程')
 	  }
   },
   mounted () {

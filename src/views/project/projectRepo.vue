@@ -6,23 +6,20 @@
 		  <br />
 		  <span style="font-weight: 700;">报告得分：{{project.point}}</span>
 	  </div>
-    <div>
-		<el-upload
-		    class="upload-demo"
-		      :on-success="handlePreview"
-		      :on-remove="handleRemove"
-			  :on-change="fileChange"
-		      :before-upload="beforeUpload"
-		      :on-preview="Previewf"
-		      multiple
-		      :limit="5"
-		      :on-exceed="handleExceed"
-		      :file-list="fileList"
-			  :auto-upload="false">
-		    <el-button slot="trigger" icon="el-icon-upload2" @click="uploadFileClick($event)">选择实验报告</el-button>
-			<el-button style="margin-left: 10px;" type="success" @click="submitUpload">上传到服务器</el-button>
-		</el-upload>
-	</div>
+	  <div class="up">
+		  <div class="choose">
+			  <el-button icon="el-icon-document-copy" type="primary" @click="checkFile">选择文件</el-button>
+			  <input id="fileinput" type="file" style="display: none;" @change="uploadPdf($event)" />
+			  <span>请上传pdf类型的文件</span>
+		  </div>
+		  <div v-if="PDF.name" @click="gotoPdf()" class="pdf">
+		    <span>{{PDF.name}}</span>
+		    <span @click.stop.prevent="delPdf()" style="color: crimson;"><i class="el-icon-delete"></i></span>
+		  </div>
+	  </div>
+	  <div>
+		  <el-button @click="submit">上传文件</el-button>
+	  </div>
   </div>
 </template>
 
@@ -34,72 +31,56 @@ export default {
 			demand:'我是实验报告的要求',
 			point:1
 		},
-		fileList:[
-			{
-				name: 'food.jpeg',
-				url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-			},
-			{
-				name: 'food2.jpeg', 
-				url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-			}]
+		file:{
+			
+		},
+		PDF:{
+			name:'',
+			url:'',
+		}
     }
   },
   methods: {
+	  uploadPdf (event) {
+	    console.log(event)
+	    if (event.target.files[0].type != 'application/pdf') {
+	      return this.$message.warning('请选择上传pdf文件')
+	    }
+		this.file=event.target.files[0]
+		console.log(this.file)
+	    let inputDOM = event.target
+	    let _this = this
+	    var reader = new FileReader()
+	    reader.readAsDataURL(event.target.files[0])//读取文件
+	    reader.onload = function (e) {
+	      _this.getPdfUrl(event.target.files[0])//将得到的blob传出读取
+	      _this.PDF.name = event.target.files[0].name
+	      inputDOM.value = null //将input置空 否则上传相同文件无反应 (不过置空后28行的打印 就看不到 event.target.files 文件数据（可以先注释此行看下数据--就是pdf文件）   )
+	    }
+	  },
+	  getPdfUrl (file) {
+	    let url = URL.createObjectURL(file) //将blob文件转化成url
+	    this.PDF.url = url  //赋值给url
+	    console.log(url)  // blob:http://localhost:8080/f2049a9d-31a6-4bd9-8a94-23dee457218f
+	    return url
+	  },
 	  handleRemove(file, fileList) {
 	          console.log(file, fileList);
-	        },
-	  handlePreview(file) {
-	          console.log(file);
-	        },
-	fileChange(file, fileList){
-		this.fileList=fileList
-	},
-	submitUpload (file, fileList) {
-		// axios将数据发送到服务器
-		let setting = {
-		    url: 'http://localhost:8080/uploadfile',
-		    method: 'post',
-		    headers: {
-		      'Content-Type': 'application/x-www-form-urlencoded'
-		    },
-		    data: this.formData
-		  }
-		  this._axiosMock(setting).then(res => {
-		    console.log(res)
-		  })
-		},
-	  Previewf(file) 
-	  {
-		  console.log(file);
-		  if (file) {
-		    const addTypeArray = file.name.split(".");
-		    const addType = addTypeArray[addTypeArray.length - 1];
-		    if (addType === "pdf") {
-		      let routeData = this.$router.resolve({
-		        path: "/insurancePdf",
-		        query: { url: file.response, showBack: false },
-		      });
-		      window.open(routeData.href, "_blank");
-		    }
-		    //".rar, .zip, .doc, .docx, .xls, .txt, .pdf, .jpg,  .png, .jpeg,"
-		    else if (addType === "doc" || addType === "docx" || addType === "xls") {
-		      window.open(
-		        "http://view.officeapps.live.com/op/view.aspx?src=" + file.url
-		      );
-		    } else if (addType === "txt") {
-		      window.open(file.url);
-		    } else if (["png", "jpg", "jpeg"].includes(addType)) {
-		      window.open(file.url);
-		    } else if (addType === "rar" || addType === "zip") {
-		      this.$message({
-		        message: "该文件类型暂不支持预览",
-		        type: "warning",
-		      });
-		       return false;
-		    }
-      }
-    }
+	  },
+	  gotoPdf(){
+	  	window.open(this.PDF.url)
+	  },
+	  submit(){
+	  	console.log('upload')
+	  },
+	  delPdf () {
+	  	this.file=''
+	    this.PDF.name = ''
+	    this.PDF.url = ''
+	  },
+	  checkFile () {
+	      document.querySelector('#fileinput').click()
+	  }
   },
   mounted () {
   },
@@ -118,6 +99,19 @@ export default {
 		padding: 10px;
 		font-size: 30px;
 		font-weight: 800;
+	}
+}
+.up{
+	// background-color: #ffaa00;
+	font-size: 14px;
+	color:#3d4a55;
+	padding: 10px;
+	.choose{
+		padding: 10px;
+		color:#6b8194;
+	}
+	.pdf{
+		cursor: pointer;
 	}
 }
 </style>

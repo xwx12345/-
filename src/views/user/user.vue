@@ -19,7 +19,7 @@
           </el-menu-item>
 		  <el-menu-item index="/useradd">
 		    <i class="el-icon-circle-plus-outline"></i>
-		    加入用户
+		    加入
 		  </el-menu-item>
         </el-menu>
       </div>

@@ -15,11 +15,8 @@
 		   <el-menu-item index="/projectRepo">
 		   		<i class="el-icon-message-solid"></i>实验报告上传
 		   </el-menu-item>
-		   <el-menu-item index="/3">
-		   		<i class="el-icon-download"></i>资料下载
-		   </el-menu-item>
 		   <el-menu-item index="/projectGrade">
-		   		<i class="el-icon-message-solid"></i>实验报告评分
+		   		<i class="el-icon-view"></i>实验报告评分
 		   </el-menu-item>
 		</el-menu>
 	</div>
