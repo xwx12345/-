@@ -41,6 +41,16 @@ const routes = [
 			component: resolve => require(['@/views/course/course.vue'], resolve)
 		},
 		{
+			path: '/courseGrade',
+			name: 'courseGrade',
+			component: resolve => require(['@/views/course/courseGrade.vue'], resolve)
+		},
+		{
+			path: '/courseModify',
+			name: 'courseModify',
+			component: resolve => require(['@/views/course/courseModify.vue'], resolve)
+		},
+		{
 			path: '/project',
 			name: 'project',
 			component: resolve => require(['@/views/project/project.vue'], resolve),
@@ -59,6 +69,11 @@ const routes = [
 					path: '/projectGrade',
 					name: 'projectGrade',
 					component: resolve => require(['@/views/project/projectGrade.vue'], resolve)
+				},
+				{
+					path: '/projectModify',
+					name: 'projectModify',
+					component: resolve => require(['@/views/project/projectModify.vue'], resolve)
 				}
 			]
 		}

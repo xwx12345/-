@@ -31,18 +31,23 @@
 		  <div class="top">
 		  		  <div>
 		  			  <span>课程名</span>
-		  			  随便哪个课程
+					  {{course.name}}
 		  		  </div>
 		  		  <div>
 		  			  <span>授课老师</span>
-		  			  老师1
+		  			  {{course.teacher}}
 		  		  </div>
 		  		  <div>
 		  			  <span>课程信息</span>
-		  			  课程简介
+		  			  {{course.info}}
 		  		  </div>
 				  <div>
-					  <span>查看课程分数详情</span>
+				  	<span>课程公告</span>
+				  	{{course.public}}
+				  </div>
+				  <div>
+					  <el-button @click="jumpToGrade()">查看课程分数分配方案</el-button>
+					  <el-button @click="modify(course.id)">编辑课程信息</el-button>
 				  </div>
 		  </div>
 		  <div class="bottom">
@@ -92,6 +97,13 @@ export default {
 			'假数据1',
 			'假数据4'
 		],
+		course:{
+			id:1,
+			name:'物理实验',
+			teacher:'老师A',
+			info:'物理实验就是物理实验',
+			public:'一些公共信息'
+		},
 		projectList:[
 			{
 				cover:'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
@@ -133,6 +145,14 @@ export default {
 	  jump(){
 		  console.log('jump')
 		  this.$router.push('/project')
+	  },
+	  jumpToGrade(){
+		  console.log('jump to grade')
+		  this.$router.push('/courseGrade')
+	  },
+	  modify(id){
+		  console.log('jump to modify')
+		  this.$router.push('/courseModify')
 	  }
   },
   mounted () {

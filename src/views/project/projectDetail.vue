@@ -6,7 +6,10 @@
 	<div class="middle">
 		<span><i class="el-icon-s-release"></i>项目总分：</span>12
 		<div class="button">
-			<button>考勤</button>
+			<button @click="check()">考勤</button>
+		</div>
+		<div class="button">
+			<button @click="modify()">修改项目信息</button>
 		</div>
 	</div>
 	<div class="info">
@@ -24,7 +27,12 @@ export default {
     }
   },
   methods: {
-
+	  check(){
+		  this.$message('已成功考勤！')
+	  },
+	  modify(){
+		  this.$router.push('/projectModify')
+	  }
   },
   mounted () {
   },
