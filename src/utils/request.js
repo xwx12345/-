@@ -7,7 +7,8 @@ import { Message, MessageBox } from 'element-ui'
 // axios.defaults.headers.post['Content-type']='application/x-www-form-urlencoded;charset=UTF-8'
 // axios.defaults.headers.post['Access-Control-Allow-Origin']='http://localhost:8080/'
 axios.defaults.withCredentials = true
-axios.defaults.baseURL='/api'
+// axios.defaults.baseURL='/api'
+axios.defaults.baseURL='https://localhost:8080/api'
 const service = axios.create({
   timeout: 180000,
   async:true,
