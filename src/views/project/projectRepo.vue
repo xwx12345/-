@@ -2,7 +2,9 @@
   <div class="pc-container">
 	  <div class="top">
 		  <div class="title">具体要求</div>
-		  <span>{{demand}}</span>
+		  <span>{{project.demand}}</span>
+		  <br />
+		  <span style="font-weight: 700;">报告得分：{{project.point}}</span>
 	  </div>
     <div>
 		<el-upload
@@ -28,7 +30,10 @@
 export default {
   data () {
     return {
-		demand:'我是实验报告的要求',
+		project:{
+			demand:'我是实验报告的要求',
+			point:1
+		},
 		fileList:[
 			{
 				name: 'food.jpeg',
