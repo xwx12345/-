@@ -22,6 +22,18 @@
 	  		<span>项目实验报告要求：</span>
 	  		<el-input type="textarea" v-model="project.re"></el-input>
 	  </div>
+	  <div class="modify">
+	  		<span>项目状态</span>
+			<el-select v-model="project.state" placeholder="请选择项目状态">
+			<el-option
+			  v-for="item in typeList"
+			  :key="item.value"
+			  :label="item.label"
+			  :value="item.value"
+			  >
+			</el-option>
+			</el-select>
+	  </div>
   </div>
 </template>
 
@@ -29,12 +41,23 @@
 export default {
   data () {
     return {
+		typeList:[
+			{
+				value:1,
+				label:'开放项目'
+			},
+			{
+				value:0,
+				label:'关闭项目'
+			}
+		],
 		project:{
 			id:'1',
 			name:'项目1',
 			point:1,
 			info:'一些简单描述',
-			re:'简单的报告要求123'
+			re:'简单的报告要求123',
+			state:1
 		}
     }
   },

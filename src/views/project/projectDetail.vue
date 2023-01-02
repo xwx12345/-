@@ -1,10 +1,12 @@
 <template>
   <div class="pc-container">
     <div class="title">
-		项目名称
+		<span>{{project.name}}</span>
+		<span v-if="project.state==1">（已开放）</span>
+		<span v-else>（未开放）</span>
 	</div>
 	<div class="middle">
-		<span><i class="el-icon-s-release"></i>项目总分：</span>12
+		<span><i class="el-icon-s-release"></i>项目总分：{{project.point}}</span>
 		<div class="button">
 			<button @click="check()">考勤</button>
 		</div>
@@ -13,8 +15,7 @@
 		</div>
 	</div>
 	<div class="info">
-		<span>一些项目介绍,哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈
-		</span>
+		<span>{{project.info}}</span>
 	</div>
   </div>
 </template>
@@ -23,7 +24,12 @@
 export default {
   data () {
     return {
-
+		project:{
+			name:'项目1',
+			point:1,
+			state:0,
+			info:'一些项目介绍,哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈'
+		}
     }
   },
   methods: {
