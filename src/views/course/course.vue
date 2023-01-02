@@ -46,8 +46,9 @@
 				  	{{course.public}}
 				  </div>
 				  <div>
-					  <el-button @click="jumpToGrade()">查看课程分数分配方案</el-button>
+					  <el-button @click="jumpToGrade(course.id)">查看课程分数分配方案</el-button>
 					  <el-button @click="modify(course.id)">编辑课程信息</el-button>
+					  <el-button @click="addProject(course.id)">加入项目</el-button>
 				  </div>
 		  </div>
 		  <div class="bottom">
@@ -146,13 +147,17 @@ export default {
 		  console.log('jump')
 		  this.$router.push('/project')
 	  },
-	  jumpToGrade(){
+	  jumpToGrade(id){
 		  console.log('jump to grade')
 		  this.$router.push('/courseGrade')
 	  },
 	  modify(id){
 		  console.log('jump to modify')
 		  this.$router.push('/courseModify')
+	  },
+	  addProject(id){
+		  console.log('jump to add')
+		  this.$router.push('/courseAddPro')
 	  }
   },
   mounted () {
