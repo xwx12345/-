@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import {changeCourseInfo} from '../../api/course'
 export default {
   data () {
     return {
@@ -40,8 +41,19 @@ export default {
   },
   methods: {
 	  save(){
-		  this.$message('已经保存修改')
-		  this.$router.push('/course')
+		  changeCourseInfo({
+			  courseid:this.course.id,
+			  coursename:this.course.name,
+			  courseinfo:this.course.info,
+			  userid:this.course.teacher
+		  }).then((r)=>{
+			  console.log(r)
+			  this.$message(r.data)
+		  }).catch((err)=>{
+			  console.log(err)
+		  })
+		  // this.$message('已经保存修改')
+		  // this.$router.push('/course')
 	  }
   },
   mounted () {
