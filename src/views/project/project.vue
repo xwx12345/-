@@ -9,7 +9,7 @@
 		  background-color="#ffffff"
 		  text-color="#7E789A"
 		  active-text-color="#000000">
-		   <el-menu-item index="/project/">
+		   <el-menu-item @click="home()" index="/project/">
 		   		<i class="el-icon-s-home"></i>项目主页
 		   </el-menu-item>
 		   <el-menu-item index="/projectRepo">
@@ -30,16 +30,20 @@
 export default {
   data () {
     return {
-		activeIndex:'projectDetail'
+		activeIndex:'projectDetail',
+		id:''
     }
   },
   methods: {
+	  home(){
+		  
+	  }
 
   },
   mounted () {
   },
   created () {
-
+	  this.id=this.$route.query.id;
   }
 }
 </script>

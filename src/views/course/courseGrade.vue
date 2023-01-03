@@ -1,7 +1,7 @@
 <template>
   <div class="pc-container">
 	  <div class="title">
-		  <span style="color: #6a66a2;">{{course.title}}</span>
+		  <span style="color: #6a66a2;">{{course.title}}(id:{{course.id}})</span>
 		  <span>成绩管理</span>
 	  </div>
 	  <div class="modify">
@@ -48,7 +48,8 @@ export default {
   data () {
     return {
 		course:{
-			title:'软件工程实验'
+			title:'软件工程实验',
+			id:''
 		},
 		point:1,
 		tableData: [
@@ -88,7 +89,7 @@ export default {
   mounted () {
   },
   created () {
-
+	  this.course.id = this.$route.query.id;
   }
 }
 </script>

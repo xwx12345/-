@@ -58,7 +58,7 @@
 		  		</div>
 		  		<div class="right_middle">
 		  		  	<div class="box" v-for="project in projectList" >
-		  		  		<div class="cover" @click="jump()">
+		  		  		<div class="cover" @click="jump(project.id)">
 		  		  			<img :src="project.cover"/>
 		  		  		</div>
 		  		  		<div class="intro">
@@ -104,46 +104,51 @@ export default {
 			'假数据1',
 			'假数据4'
 		],
-		allCourseInfo:[],
 		course:{
-			id:1,
-			name:'物理实验',
-			teacher:'老师A',
-			info:'物理实验就是物理实验',
-			public:'一些公共信息'
+			id:'0',
+			name:'',
+			teacher:'',
+			info:'',
+			public:''
 		},
 		projectList:[
 			{
+				id:'1',
 				cover:'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
 				ddl:'1.1',
 				title:'标题',
 				info:'相关信息1',
 			},
 			{
+				id:'2',
 				cover:'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
 				ddl:'1.2',
 				title:'标题1',
 				info:'相关信息2',
 			},
 			{
+				id:'3',
 				cover:'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
 				ddl:'1.3',
 				title:'标题2',
 				info:'相关信息1',
 			},
 			{
+				id:'1',
 				cover:'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
 				ddl:'1.4',
 				title:'标题3',
 				info:'相关信息244',
 			},
 			{
+				id:'1',
 				cover:'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
 				ddl:'1.4',
 				title:'标题3',
 				info:'相关信息244',
 			},
 			{
+				id:'1',
 				cover:'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
 				ddl:'1.4',
 				title:'标题3',
@@ -158,27 +163,36 @@ export default {
 		  this.course.id=item.id
 		  this.course.name=item.name
 	  },
-	  handleAll(){
-		  this.department='全部'
-	  },
 	  handleCurrentChange(val) {
 	    console.log(`当前页: ${val}`);
 	  },
-	  jump(){
+	  jump(item){
 		  console.log('jump')
-		  this.$router.push('/project')
+		  this.$router.push({
+		    path: '/project',
+		    query: { id: item }
+		  })
 	  },
 	  jumpToGrade(id){
 		  console.log('jump to grade')
-		  this.$router.push('/courseGrade')
+		  this.$router.push({
+		    path: '/courseGrade',
+		    query: { id: this.course.id }
+		  })
 	  },
 	  modify(id){
 		  console.log('jump to modify')
-		  this.$router.push('/courseModify')
+		  this.$router.push({
+		    path: '/courseModify',
+		    query: { id: this.course.id }
+		  })
 	  },
 	  addProject(id){
 		  console.log('jump to add')
-		  this.$router.push('/courseAddPro')
+		  this.$router.push({
+		    path: '/courseAddPro',
+		    query: { id: this.course.id }
+		  })
 	  }
   },
   mounted () {
@@ -191,17 +205,17 @@ export default {
 			  this.menuList1.push(
 			  {
 				  id:item.courseid,
-				  name:item.coursename
+				  name:item.coursename,
+				  info:item.courseinfo,
+				  teacher:item.userid
 			  })
-			  this.allCourseInfo.push(item)
 		  })
 	  }).catch((err)=>{
 		  console.log(err)
 	  })
-	  console.log(this.allCourseInfo)
 	  //更改课程主体
-	  this.course.id=this.menuList1[0].id
-	  this.course.name=this.menuList1[0].name
+	  // this.course.id=this.menuList1[0].id
+	  // this.course.name=this.menuList1[0].name
 	  //渲染项目
 	  
   }

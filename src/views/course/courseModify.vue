@@ -58,7 +58,7 @@ export default {
   mounted () {
   },
   created () {
-
+	  this.course.id = this.$route.query.id;
   }
 }
 </script>
