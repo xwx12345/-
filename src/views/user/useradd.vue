@@ -81,15 +81,15 @@ export default {
     return {
 		typeList:[
 			{
-				value: '1',
+				value: 'main_teacher',
 				label: '责任教师'
 			},
 			{
-				value: '2',
+				value: 'teacher',
 				label: '教师'
 			},
 			{
-				value: '3',
+				value: 'student',
 				label: '学生'
 			}
 		],
@@ -116,7 +116,7 @@ export default {
 			username:this.user.name,
 		    password: this.user.password,
 			email:this.user.email,
-			usertype:this.user.type
+			user_type:this.user.type
 		  }).then((r)=>{
 			  console.log(r)
 			  consolg.log(r.data)

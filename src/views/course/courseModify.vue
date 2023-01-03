@@ -31,7 +31,7 @@ export default {
   data () {
     return {
 		course:{
-			id:'1',
+			id:'001',
 			name:'课程1',
 			teacher:'123',
 			info:'一些简单描述',
@@ -48,12 +48,11 @@ export default {
 			  userid:this.course.teacher
 		  }).then((r)=>{
 			  console.log(r)
-			  this.$message(r.data)
+			  this.$message(r)
 		  }).catch((err)=>{
 			  console.log(err)
 		  })
-		  // this.$message('已经保存修改')
-		  // this.$router.push('/course')
+		  this.$router.push('/course')
 	  }
   },
   mounted () {

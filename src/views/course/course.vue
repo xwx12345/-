@@ -9,7 +9,7 @@
 	  					</span>
 	  					<el-menu-item v-for="(item, index) in menuList1" :key="index" @click="handleClick(item)">
 	  					  <template #title>
-	  					    <span>{{item}}</span>
+	  					    <span>{{item.name}}</span>
 	  					  </template>
 	  					</el-menu-item>
 	  			  </el-submenu>
@@ -79,7 +79,6 @@
 		  		  		:total="1000">
 		  		  	</el-pagination>
 		  		</div> -->
-				<el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
 		  </div>
 	  </div>
   </div>
@@ -93,8 +92,14 @@ export default {
 		department:'全部',
 		currentPage:1,
 		menuList1:[
-			'假数据1',
-			'假数据2'
+			// {
+			// 	id:'1',
+			// 	name:'课程1'
+			// },
+			// {
+			// 	id:'2',
+			// 	name:'课程2'
+			// }
 		],
 		menuList2:[
 			'假数据1',
@@ -179,6 +184,13 @@ export default {
   created () {
 	  getCourses().then((r)=>{
 		  console.log(r)
+		  r.forEach(item=>{
+			  this.menuList1.push(
+			  {
+				  id:item.courseid,
+				  name:item.coursename
+			  })
+		  })
 	  }).catch((err)=>{
 		  console.log(err)
 	  })
