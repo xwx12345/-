@@ -11,3 +11,9 @@ export function changeCourseInfo(data) {
         data: param
     })
 }
+export function getCourses() {
+    return request({
+        url:'/getCourses',
+        method:'GET'
+    })
+}

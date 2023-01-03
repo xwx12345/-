@@ -70,7 +70,7 @@
 		  		  		</div>
 		  		  	</div>
 		  		</div>
-		  		<div class="right_bottom">
+		  		<!-- <div class="right_bottom">
 		  		  	<el-pagination
 		  		  		@current-change="handleCurrentChange"
 		  		  		:current-page.sync="currentPage"
@@ -78,18 +78,20 @@
 		  		  		layout="total, prev, pager, next"
 		  		  		:total="1000">
 		  		  	</el-pagination>
-		  		</div>
+		  		</div> -->
+				<el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
 		  </div>
 	  </div>
   </div>
 </template>
 
 <script>
+import {getCourses} from '../../api/course'
 export default {
   data () {
     return {
 		department:'全部',
-		currentPage:'1',
+		currentPage:1,
 		menuList1:[
 			'假数据1',
 			'假数据2'
@@ -123,6 +125,18 @@ export default {
 				ddl:'1.3',
 				title:'标题2',
 				info:'相关信息1',
+			},
+			{
+				cover:'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
+				ddl:'1.4',
+				title:'标题3',
+				info:'相关信息244',
+			},
+			{
+				cover:'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
+				ddl:'1.4',
+				title:'标题3',
+				info:'相关信息244',
 			},
 			{
 				cover:'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
@@ -163,7 +177,11 @@ export default {
   mounted () {
   },
   created () {
-
+	  getCourses().then((r)=>{
+		  console.log(r)
+	  }).catch((err)=>{
+		  console.log(err)
+	  })
   }
 }
 </script>
