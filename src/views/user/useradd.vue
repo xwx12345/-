@@ -98,7 +98,7 @@ export default {
 			id:'12345',
 			password:'123456',
 			email:'123@qq.com',
-			type:'1'
+			type:'student'
 		},
 		course:{
 			name:'课程1',
@@ -168,7 +168,7 @@ export default {
 		  span{
 		    display: inline-block;
 		    border-radius: 10px;
-		    background: #aaaaff;
+		    background: #aacfff;
 		    color: #fff;
 		    padding: 10px;
 		  }
@@ -177,7 +177,7 @@ export default {
 		  display: flex;
 		  justify-content: center;
 		  align-items: center;
-		  background: rgba(255,255,255,0.5);
+		  background: #e1ecff;
 		  border-radius: 10px;
 		  margin: 10px;
 		  .main{
@@ -187,7 +187,7 @@ export default {
 		      font-size: 16px;
 		      font-weight: 600;
 		      letter-spacing: 1px;
-		      color: #d89f9f;
+		      color: #927d9e;
 		      margin-right: 10px;
 		    }
 		    input{
@@ -220,7 +220,7 @@ export default {
 		  }
 		  .button{
 		    border-radius: 10px;
-		    background: #aaaaff;
+		    background: #aacfff;
 		    font-size: 16px;
 		    color: #fff;
 		    padding: 10px;

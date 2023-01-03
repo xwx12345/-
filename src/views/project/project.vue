@@ -3,7 +3,7 @@
     <div class="left">
 		<el-menu
 		  :default-active="activeIndex"
-		  :router="true"
+		  :router="false"
 		  class="menu"
 		  mode="vertical"
 		  background-color="#ffffff"
@@ -12,10 +12,10 @@
 		   <el-menu-item @click="home()" index="/project/">
 		   		<i class="el-icon-s-home"></i>项目主页
 		   </el-menu-item>
-		   <el-menu-item index="/projectRepo">
+		   <el-menu-item @click="repo()" index="/projectRepo">
 		   		<i class="el-icon-message-solid"></i>实验报告上传
 		   </el-menu-item>
-		   <el-menu-item index="/projectGrade">
+		   <el-menu-item @click="grade()" index="/projectGrade">
 		   		<i class="el-icon-view"></i>实验报告评分
 		   </el-menu-item>
 		</el-menu>
@@ -36,8 +36,24 @@ export default {
   },
   methods: {
 	  home(){
-		  
+		  this.$router.push({
+		    path: '/project',
+		    query: { id: this.id }
+		  })
+	  },
+	  repo(){
+		  this.$router.push({
+		    path: '/projectRepo',
+		    query: { id: this.id }
+		  })
+	  },
+	  grade(){
+	  		  this.$router.push({
+	  		    path: '/projectGrade',
+	  		    query: { id: this.id }
+	  		  })
 	  }
+	  
 
   },
   mounted () {
