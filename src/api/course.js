@@ -17,3 +17,14 @@ export function getCourses() {
         method:'GET'
     })
 }
+export function getProjectList(data) {
+    let param = new URLSearchParams(data);
+    console.log('paras', param);
+    console.log('data', data);
+
+    return request({
+        url: '/getProjectList',
+        method: 'POST',
+        data: param
+    })
+}

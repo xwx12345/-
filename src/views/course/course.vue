@@ -104,6 +104,7 @@ export default {
 			'假数据1',
 			'假数据4'
 		],
+		allCourseInfo:[],
 		course:{
 			id:1,
 			name:'物理实验',
@@ -182,6 +183,7 @@ export default {
   mounted () {
   },
   created () {
+	  //得到所有课程
 	  getCourses().then((r)=>{
 		  console.log(r)
 		  r.forEach(item=>{
@@ -190,10 +192,17 @@ export default {
 				  id:item.courseid,
 				  name:item.coursename
 			  })
+			  this.allCourseInfo.push(item)
 		  })
 	  }).catch((err)=>{
 		  console.log(err)
 	  })
+	  console.log(this.allCourseInfo)
+	  //更改课程主体
+	  this.course.id=this.menuList1[0].id
+	  this.course.name=this.menuList1[0].name
+	  //渲染项目
+	  
   }
 }
 </script>

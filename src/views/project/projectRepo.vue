@@ -24,16 +24,19 @@
 </template>
 
 <script>
+import {postReport} from '../../api/project.js'
 export default {
   data () {
     return {
 		project:{
 			demand:'我是实验报告的要求',
-			point:1
+			point:1,
+			id:'1'
 		},
 		file:{
 			
 		},
+		userid:'1',
 		PDF:{
 			name:'',
 			url:'',
@@ -72,6 +75,16 @@ export default {
 	  },
 	  submit(){
 	  	console.log('upload')
+		postReport({
+			content:this.file,
+			projectid:this.project.id,
+			userid:this.userid
+		}).then(r=>{
+			console.log(r)
+			this.$message(r)
+		}).catch(err=>{
+			console.log(err)
+		})
 	  },
 	  delPdf () {
 	  	this.file=''
