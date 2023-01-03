@@ -156,6 +156,7 @@ export default {
 	  handleClick(item){
 		  console.log(item)
 		  this.course.id=item.id
+		  this.course.name=item.name
 	  },
 	  handleAll(){
 		  this.department='全部'
