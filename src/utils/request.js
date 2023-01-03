@@ -13,7 +13,7 @@ const service = axios.create({
   timeout: 180000,
   async:true,
   crossDomain:true,
-  withCredentials: true
+  withCredentials: false
 });
 
 // 请求拦截器配置

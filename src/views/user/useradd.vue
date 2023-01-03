@@ -35,7 +35,7 @@
     </div>
 	<div class="button">
 	    <span>增加课程</span>
-	  </div>
+	</div>
 	  <div class="form">
 	    <div class="main">
 	      <span>课程名:</span>
@@ -55,13 +55,27 @@
 	      <i class="el-icon-circle-plus-outline"></i>
 	    </div>
 	  </div>
-	</div>
+	  <div class="button">
+	      <span>为课程增加学生</span>
+	  </div>
+	    <div class="form">
+	      <div class="main">
+	        <span>课程id</span>
+	        <input v-model="course.id"/>
+	        <br />
+	  	    <span>学生id:</span>
+	  	    <input v-model="student"/>
+	  	  </div>
+	      <div class="button" @click="courseAddStu()">
+	        <i class="el-icon-circle-plus-outline"></i>
+	      </div>
+	    </div>
   </div>
 </div>
 </template>
 
 <script>
-import {UserAdd} from '../../api/user'
+import {UserAdd,CourseAddStudent,createCourse} from '../../api/user'
 export default {
   data () {
     return {
@@ -91,7 +105,8 @@ export default {
 			id:'001',
 			teacher:'010',
 			info:'一句话简介'
-		}
+		},
+		student:'124'
     }
   },
   methods: {
@@ -99,26 +114,42 @@ export default {
 		  UserAdd ({
 		    userid: this.user.id,
 			username:this.user.name,
-		    password: this.user.password
+		    password: this.user.password,
+			email:this.user.email,
+			usertype:this.user.type
 		  }).then((r)=>{
 			  console.log(r)
-		    // if(r.header.code === -1){
-		    //   this.$message.error(r.header.message)
-		    //   return
-		    // }
-		    // else{
-		    //   this.$message('您已成功登录！')
-		    //   var token=r.data.token
-		    //   var user=r.data.user
-		    //   this.$store.dispatch('setUser',user)
-		    //   this.$store.dispatch('setToken',token)
-		    //   this.$router.push('/')
+			  consolg.log(r.data)
+			  this.$message(r.data)
 		  }).catch((err)=>{
 		    console.log(err)
 		  })
 	  },
 	  addCourse(){
 		  console.log('增加课程')
+		  createCourse({
+			  courseid:this.course.id,
+			  coursename:this.course.name,
+			  userid:this.course.teacher,
+			  courseinfo:this.course.info
+		  }).then((r)=>{
+			  console.log(r)
+			  this.$message(r.data)
+		  }).catch((err)=>{
+			  console.log(err)
+		  })
+	  },
+	  courseAddStu(){
+		  console.log('课程增加学生')
+		  CourseAddStudent({
+			  userid:this.student,
+			  courseid:this.course.id
+		  }).then((r)=>{
+			  console.log(r)
+			  this.$message(r.data)
+		  }).catch((err)=>{
+			  console.log(err)
+		  })
 	  }
   },
   mounted () {
