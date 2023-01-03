@@ -89,7 +89,6 @@ import {getCourses} from '../../api/course'
 export default {
   data () {
     return {
-		department:'全部',
 		currentPage:1,
 		menuList1:[
 			// {
@@ -154,7 +153,8 @@ export default {
   },
   methods: {
 	  handleClick(item){
-		  this.department=item
+		  console.log(item)
+		  this.course.id=item.id
 	  },
 	  handleAll(){
 		  this.department='全部'
